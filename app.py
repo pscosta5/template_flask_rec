@@ -4,11 +4,11 @@ from recommender import get_recommendation
 app = Flask(__name__)
 
 
-@app.route("/recommender", methods=["GET", "POST"])
+@app.route("/product-recommender", methods=["GET", "POST"])
 def index():
     if request.method == "POST" and request.form["hhkey"]:
-        hhkey = int(request.form["hhkey"])
         try:
+            hhkey = int(request.form["hhkey"])
             recommended_products = get_recommendation(hhkey)
             return render_template(
                 "layout.html", recommended_products=recommended_products

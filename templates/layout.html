@@ -7,6 +7,17 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ url_for("static", filename="material.css") }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for("static", filename="favicon/apple-touch-icon.png") }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for("static", filename="favicon/favicon/favicon-32x32.png") }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for("static", filename="favicon/favicon-16x16.png") }}">
+    <link rel="manifest" href="{{ url_for("static", filename="favicon/site.webmanifest") }}">
+    <link rel="mask-icon" href="{{ url_for("static", filename="favicon/safari-pinned-tab.svg") }}" color="#5bbad5">
+    <link rel="shortcut icon" href="{{ url_for("static", filename="favicon/favicon.ico") }}">
+    <meta name="msapplication-TileColor" content="#00a300">
+    <meta name="msapplication-config" content="{{ url_for("static", filename="favicon/browserconfig.xml") }}">
+    <meta name="theme-color" content="#ffffff">
+
     <title>Recommendations for FRB households</title>
 </head>
 <body class="mdc-typography main-box">
@@ -28,7 +39,7 @@
     Type in a quantdb household key, and the recommender will return three products it thinks the
     household is likely to be interested in.
 </p>
-<form action="/recommender" method="POST">
+<form action="/product-recommender" method="POST">
     <div class="mdc-text-field mdc-text-field--outlined">
         <input type="text" id="tf-outlined" class="mdc-text-field__input" name="hhkey">
         <div class="mdc-notched-outline">
