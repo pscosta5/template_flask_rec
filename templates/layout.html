@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for("static", filename="material.css") }}">
+    <title>Recommendations for FRB households</title>
+</head>
+<body class="mdc-typography main-box">
+<h2 class="mdc-typography--headline2">First Republic product recommender</h2>
+<h4 class="mdc-typography--headline4">A recommendation system for FRB households</h4>
+<p class="mdc-typography--body1">
+    Quantdb conveniently houses many of First Republic’s core data—customers, households, loans, deposits, and
+    wealth—under one unified database. This creates the ideal environment for a recommendation system tailored to FRB’s
+    products.
+</p>
+<p class="mdc-typography--body1">
+    The Quantdb‐powered recommendation system works by comparing the inputted household to all other FRB households in
+    Quantdb based on various factors—such as age, relationship types, balances, and customer categories—and returns the
+    top three highest weighted products. These recommendations may be used to assist branch employees, inform marketing,
+    and assist households in finding compatible products.
+</p>
+<h4 class="mdc-typography--headline4">The model</h4>
+<p class="mdc-typography--body1">
+    Type in a quantdb household key, and the recommender will return three products it thinks the
+    household is likely to be interested in.
+</p>
+<form action="/recommender" method="POST">
+    <div class="mdc-text-field mdc-text-field--outlined">
+        <input type="text" id="tf-outlined" class="mdc-text-field__input" name="hhkey">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label for="tf-outlined" class="mdc-floating-label">Quantdb household key</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <button class="mdc-button mdc-button--raised" type="submit">
+        <i class="material-icons mdc-button__icon" aria-hidden="true">account_balance</i>
+        <span class="mdc-button__label">Get products</span>
+    </button>
+    </input>
+</form>
+<h6 class="mdc-typography--headline6" style="display:
+        {% if recommended_products %}
+            block
+        {% else %}
+            none
+        {% endif %}">
+    Recommended products
+</h6>
+<p class="mdc-typography--body1" style="display:
+        {% if recommended_products %}
+            block
+        {% else %}
+            none
+        {% endif %}">
+    We think the household would be interested in these three products…
+</p>
+<p class="mdc-typography--body1" style="display:
+        {% if error_message %}
+            block
+        {% else %}
+            none
+        {% endif %}">
+    Type in a valid Quantdb household key.
+</p>
+<ul class="mdc-list" style="display:
+        {% if recommended_products %}
+            block
+        {% else %}
+            none
+        {% endif %}">
+    <li class="mdc-list-item item-1" tabindex="0">
+        <span class="mdc-list-item__text">
+              {% if recommended_products %}
+                  {{ recommended_products[0] }}
+              {% else %}
+                  none
+              {% endif %}
+        </span>
+    </li>
+    <li class="mdc-list-item item-2">
+        <span class="mdc-list-item__text">
+              {% if recommended_products %}
+                  {{ recommended_products[1] }}
+              {% else %}
+                  none
+              {% endif %}
+        </span>
+    </li>
+    <li class="mdc-list-item item-3">
+        <span class="mdc-list-item__text">
+               {% if recommended_products %}
+                   {{ recommended_products[2] }}
+               {% else %}
+                   none
+               {% endif %}
+        </span>
+    </li>
+</ul>
+<script>
+    mdc.textField.MDCTextField.attachTo(
+        document.querySelector(".mdc-text-field")
+    );
+    mdc.ripple.MDCRipple.attachTo(
+        document.querySelector(".mdc-button")
+    );
+    mdc.list.MDCList.attachTo(
+        document.querySelector(".mdc-list")
+    );
+    mdc.ripple.MDCRipple.attachTo(
+        document.querySelector((".item-1"))
+    );
+    mdc.ripple.MDCRipple.attachTo(
+        document.querySelector((".item-2"))
+    );
+    mdc.ripple.MDCRipple.attachTo(
+        document.querySelector((".item-3"))
+    );
+</script>
+</body>
+</html>
